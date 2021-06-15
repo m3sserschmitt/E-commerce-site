@@ -1,0 +1,57 @@
+.product-characteristics-list {
+    list-style-type: none;
+}
+
+.product-price, 
+.product-category, 
+.product-color, 
+.product-weight,
+.product-release,
+.product-chipset,
+.product-brand {
+    text-transform: uppercase;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.product-returnable {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.price-value, 
+.category-value, 
+.color-value, 
+.name-value,
+.weight-value,
+.release-value,
+.chipset-value,
+.brand-value {
+    font-weight: 800;
+    color: var(--light-blue);
+}
+
+.returnable-value {
+    font-size: small;
+}
+
+.category-value, 
+.color-value, 
+.release-value,
+.chipset-value,
+.brand-value {
+    text-transform: none;
+}
+
+.product-name {
+    text-align: center;
+    margin-bottom: 0.7rem;
+    margin-top: 0.7rem;
+}
+
+.product-image {
+    border-radius: 0.35rem;
+    
+    width: 100%;
+    height: auto;
+}

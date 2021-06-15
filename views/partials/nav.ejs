@@ -1,0 +1,70 @@
+<nav>
+    <label for="menu-switch">
+        <img src="/public/pictures/hamburger_icon.png" alt="Menu">
+    </label>
+    <input id="menu-switch" type="checkbox">
+
+    <ul class="menu">
+
+        <li><a href="/"><img src="/public/pictures/home.png" alt="home"><span>Home</span></a></li>
+        <li>
+            <div href="/store">Store</div>
+            <ul class="menu-subsection">
+                <li>
+                    <div></div><a href="/store">All</a>
+                    <div></div>
+                </li>
+                <% for(let category of locals.productCategories) { %>
+                    <li>
+                        <div></div><a href="<%= `/store?category=${category}` %>">
+                            <%= category[0].toUpperCase() + category.slice(1)%>
+                        </a>
+                        <div></div>
+                    </li>
+                    <% } %>
+            </ul>
+        </li>
+        <li><a href="/register">Register</a></li>
+        <li><a href="/login">Login</a></li>
+
+        <li>
+            <div>Gallery</div>
+            <ul class="menu-subsection">
+                <li>
+                    <div></div><a href="/static_gallery">Static</a>
+                    <div></div>
+                </li>
+                <li id="animated-gallery-menu-option">
+                    <div></div><a href="/animated_gallery">Animated</a>
+                    <div></div>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="/terms">Legal</a>
+            <ul class="menu-subsection">
+                <li>
+                    <div></div><a href="/terms#terms">Terms</a>
+                    <div></div>
+                </li>
+                <li>
+                    <div></div><a href="/terms#privacy">Privacy</a>
+                    <div></div>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <div>
+                <img id="theme-switch" src="/public/pictures/sun.png">
+            </div>
+        </li>
+
+    </ul>
+</nav>
+
+<script>
+    let selectedTheme = localStorage.getItem('theme');
+    applyTheme(selectedTheme ? parseInt(selectedTheme) : 0);
+</script>

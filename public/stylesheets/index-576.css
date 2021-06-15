@@ -1,0 +1,25 @@
+/* html
+{
+    font-size: 11px;
+} */
+
+#main-grid
+{
+    display: block;
+}
+
+.iframe-section
+{
+    flex-direction: column-reverse;
+}
+
+.statistics-table
+{
+    min-width: var(--small-screen);
+}
+
+.table-container
+{
+    overflow-y: hidden;
+    overflow-x: scroll;
+}

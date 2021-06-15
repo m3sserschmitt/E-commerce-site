@@ -1,0 +1,201 @@
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url("../pictures/cyber-3400789_1920.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 25rem;
+
+    color: var(--light-grey);
+}
+
+body.light header h1, body.light header q {
+    color: var(--primary-color);
+}
+
+header q {
+    font-family: 'Pattaya', sans-serif;
+}
+
+header h1 {
+    margin: 0;
+}
+
+#main-grid {
+    display: grid;
+
+    grid-template-areas:
+        "presentation   presentation   presentation  presentation"
+        "online-users   statistics     statistics    site-info"
+        "events         events         main-table    main-table"
+        "announcements  announcements  main-table    main-table"
+        "others         others         others        others";
+}
+
+#presentation {
+    grid-area: presentation;
+}
+
+#online-users {
+    grid-area: online-users;
+}
+
+#statistics {
+    grid-area: statistics;
+}
+
+#site-info {
+    grid-area: site-info;
+}
+
+#events {
+    grid-area: events;
+}
+
+#main-table {
+    grid-area: main-table;
+}
+
+.table-container {
+    background-color: var(--third-color);
+    overflow: hidden;
+    border-radius: 2%;
+}
+
+.statistics-table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    line-height: 1.8rem;
+    transition: 0.3s;
+}
+
+.statistics-table thead {
+    background-color: rgba(var(--light-blue-rgb), 0.3);
+    opacity: 0.8;
+}
+
+.statistics-table tfoot tr td {
+    text-align: left;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 0.8rem;
+    background-color: rgba(var(--secondary-color-rgb), 0.3);
+}
+
+.statistics-table tbody tr:hover td {
+    background-color: var(--light-blue);
+    transition: 0.3s;
+}
+
+.statistics-table td:nth-of-type(2n) {
+    background-color: var(--secondary-color);
+}
+
+#announcements {
+    grid-area: announcements;
+}
+
+#others {
+    grid-area: others;
+}
+
+/* @media screen and (min-width: 1000px)
+{
+    #animated-gallery-section {
+        display: none;
+    }
+} */
+
+.iframe-section {
+    display: flex;
+    background-color: var(--third-color);
+    height: 60vh;
+
+    border-radius: 1%;
+}
+
+.iframe-section iframe {
+    flex-grow: 1.8;
+}
+
+.iframe-tab-section {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.iframe-tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 5px;
+    flex-basis: 15%;
+    background-color: var(--primary-color);
+    border: 1px solid var(--light-blue);
+    max-width: 70%;
+
+    border-top-right-radius: 5%;
+    border-bottom-right-radius: 5%;
+    text-decoration: none;
+    color: var(--light-blue);
+    transition: 0.3s;
+}
+
+.iframe-tab:hover {
+    max-width: 75%;
+    transition: 0.3s;
+}
+
+#banner {
+    z-index: 1000;
+    position: fixed;
+    bottom: 10px;
+    left: -100%;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 800;
+    border-radius: 5%;
+    color: var(--light-blue);
+    animation-name: banner-animation;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-duration: 15s;
+    animation-timing-function: linear;
+    animation-delay: 1s;
+}
+
+@keyframes banner-animation {
+    0% {
+        left: -100%;
+        background-color: rgba(var(--primary-color-rgb), .4);
+        border: 2px solid var(--third-color);
+    }
+    33.33%
+    {
+        background-color: var(--primary-color);
+        border: 2px solid var(--third-color);
+        left: 0;
+    }
+    50%{
+        left: 0;
+        background-color: var(--third-color);
+        border: 2px solid var(--primary-color);
+    }
+    66.66%{
+        left: 0;
+        background-color: var(--third-color);
+        border: 2px solid var(--primary-color);
+    }
+    100% {
+        left: 100%;
+        background-color: rgba(var(--primary-color-rgb), .4);
+        border: 2px solid var(--third-color);
+    }
+}

@@ -1,0 +1,161 @@
+{
+    "gallery_path": "/public/pictures/gallery",
+    "pictures": [
+        {
+            "path": "apple-1.jpg",
+            "title": "Iphone 8",
+            "description": "Checkout a brand new smartphone from Apple.",
+            "category": "apple"
+        },
+        {
+            "path": "apple-2.jpg",
+            "title": "Iphone X",
+            "description": "Hands up! Iphone X is here!!",
+            "category": "apple"
+        },
+        {
+            "path": "camera-1842202_640.jpg",
+            "title": "Be free",
+            "description": "Now ypu can be more active with the new Iphone",
+            "category": "apple"
+        },
+        {
+            "path": "cell-phone-801946_640.jpg",
+            "title": "Trends are changing rapidly",
+            "description": "Stay in trend with the new Iphone!",
+            "category": "apple"
+        },
+        {
+            "path": "girl-1192032_640.jpg",
+            "title": "Sunny",
+            "description": "The World is looking at you! Be trendy with Apple products.",
+            "category": "apple"
+        },
+        {
+            "path": "hands-1851218_640.jpg",
+            "title": "Samsung A20",
+            "description": "Checkout the new Samsung Galaxy A20",
+            "category": "samsung"
+        },
+        {
+            "path": "mobile-phone-1875813_640.jpg",
+            "title": "Discover more!",
+            "description": "Our world is full of amazing places! Discover them with Iphone 8.",
+            "category": "apple"
+        },
+        {
+            "path": "samsung-1283938_640.jpg",
+            "title": "Samsung S10",
+            "description": "What do you expect from tomorrow? A new Samsung, maybe? =)",
+            "category": "samsung"
+        },
+        {
+            "path": "office-865091_640.jpg",
+            "title": "Productivity",
+            "description": "Be more productive with Apple ecosystem.",
+            "category": "apple"
+        },
+        {
+            "path": "woman-2354157_640.jpg",
+            "title": "Samsung S8",
+            "description": "Samsung Galaxy S8, your daily partner.",
+            "category": "samsung"
+        },
+        {
+            "path": "smartphone-407108_640.jpg",
+            "title": "Have Fun!",
+            "description": "Take your friends and ... do not forget your Samsung =))",
+            "category": "samsung"
+        },
+        {
+            "path": "smartphone-381237_640.jpg",
+            "title": "Iphone 8",
+            "description": "This phone has an amazing camera!!",
+            "category": "apple"
+        },
+        {
+            "path": "iphone-410324_640.jpg",
+            "title": "Cool, huh?",
+            "description": "You can have one too!",
+            "category": "apple"
+        },
+        {
+            "path": "iphone-500291_640.jpg",
+            "title": "Iphone",
+            "description": "One phone, one generation...",
+            "category": "apple"
+        },
+        {
+            "path": "office-1730939_640.jpg",
+            "title": "Apple products",
+            "description": "All you could ever need for daily work",
+            "category": "apple"
+        },
+        {
+            "path": "sport-3365503_640.jpg",
+            "title": "Be active",
+            "description": "There is always time for sport",
+            "category": "apple"
+        },
+        {
+            "path": "samsung-793043_640.jpg",
+            "title": "Office",
+            "description": "Get your work done with this new Samsung Tablet",
+            "category": "samsung"
+        },
+        {
+            "path": "instagram-1519537_640.jpg",
+            "title": "New Samsung Laptop",
+            "description": "You should have this laptop",
+            "category": "samsung"
+        },
+        {
+            "path": "internet-search-engine-1433323_640.jpg",
+            "title": "New Tablet from Samsung",
+            "description": "What do you think of this tablet from Samsung? Cool, huh?",
+            "category": "samsung"
+        },
+        {
+            "path": "modern-technologies-1263422_640.jpg",
+            "title": "Samsung Tablet",
+            "description": "This tablet is amazing!!",
+            "category": "samsung"
+        },
+        {
+            "path": "workplace-1949404_640.jpg",
+            "title": "Work",
+            "description": "We have the complete solution for productivity",
+            "category": "samsung"
+        },
+        {
+            "path": "woman-638384_640.jpg",
+            "title": "Samsung",
+            "description": "Your age is just a number =)",
+            "category": "samsung"
+        },
+        {
+            "path": "mobile-605422_640.jpg",
+            "title": "Accessories",
+            "description": "Buy this new Samsung with all accessories included",
+            "category": "samsung"
+        },
+        {
+            "path": "relaxation-1388228_640.jpg",
+            "title": "Relaxation",
+            "description": "Your Time, your rules.",
+            "category": "samsung"
+        },
+        {
+            "path": "close-up-3111177_640.jpg",
+            "title": "Accessories",
+            "description": "Samsung Galaxy S20, all accessories included.",
+            "category": "samsung"
+        },
+        {
+            "path": "apple-606761_640.jpg",
+            "title": "Apple Workstation",
+            "description": "Get your job done with this powerful workstation.",
+            "category": "apple"
+        }
+    ]
+}

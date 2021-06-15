@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head') %>
+        <title>Animated Gallery</title>
+
+    <link rel="stylesheet" href="/public/stylesheets/animated-gallery.css" type="text/css">
+    <link rel="stylesheet" href="/public/stylesheets/_animated-gallery.css" type="text/css">
+</head>
+
+<body >
+    <header>
+        <%- include ('../partials/nav') %>
+    </header>
+
+    <main>
+        <h1 class="gallery-heading">Animated Gallery</h1>
+        <section id="animated-gallery-section">
+            <%- include('../partials/animated_gallery') %>
+        </section>
+    </main>
+
+    <footer>
+        <%- include ('../partials/footer') %>
+    </footer>
+
+</body>
+
+</html>

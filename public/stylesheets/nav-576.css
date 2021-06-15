@@ -1,0 +1,48 @@
+nav .menu-subsection {
+  display: block;
+}
+nav label {
+  display: flex;
+  align-items: center;
+  padding-left: 7px;
+  height: 100%;
+}
+nav label img {
+  height: 1.2rem;
+  width: 1.2rem;
+}
+nav a span {
+  display: none;
+}
+nav ul.menu {
+  display: none;
+}
+nav ul.menu li {
+  height: auto;
+}
+nav ul.menu li .menu-subsection li:hover {
+  font-size: 1.2rem;
+  transition: 0.3s;
+}
+nav ul.menu li:hover .menu-subsection {
+  animation-duration: 0s;
+}
+nav #menu-switch:checked + ul.menu {
+  display: block;
+  animation-name: show-menu;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-duration: 0.3s;
+  animation-timing-function: linear;
+}
+
+@keyframes show-menu {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/*# sourceMappingURL=nav-576.css.map */

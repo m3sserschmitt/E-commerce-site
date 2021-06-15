@@ -1,0 +1,105 @@
+$count: 12 !default;
+
+#animated-gallery-section {
+    display: flex;
+    justify-content: center;
+}
+
+.a-gallery {
+    position: relative;
+    overflow: hidden;
+    width: 640px;
+    height: 426px;
+}
+
+.a-gallery {
+    figure {
+        position: relative;
+        width: 640px;
+        height: 426px;
+        margin: 0;
+    }
+
+    figcaption {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        opacity: 1;
+        background-color: rgba(var(--primary-color-rgb), 0.75);
+        font-weight: 600;
+    }
+}
+
+#animated-gallery {
+    border: 8px solid var(--secondary-color);
+
+    figure {
+        display: none;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 0;
+
+        animation-name: gallery-animation;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        animation-fill-mode: forwards;
+        animation-duration: $count * 3s;
+    }
+}
+
+#animated-gallery:hover {
+    figure {
+        animation-play-state: paused;
+    }
+}
+
+@for $i from 1 through $count {
+    #animated-gallery figure:nth-of-type(#{$i}) {
+        display: block;
+        animation-delay: ($count - $i) * 3s;
+    }
+}
+
+$t: ($count - 1) / $count * 100%;
+
+$t1: (100% - $t) / 3;
+$t2: (100% - $t) / 2;
+$t3: (100% - $t) * 0.6;
+
+$t4: $t;
+$t5: $t4 + 0.00001%;
+
+@keyframes gallery-animation {
+    0% {
+        z-index: 1;
+        left: 0;
+        opacity: 1;
+    }
+    #{$t1} {
+        left: 25%;
+        opacity: 1;
+    }
+    #{$t2} {
+        left: -25%;
+        opacity: 0.4;
+    }
+    #{$t3} {
+        left: 100%;
+        opacity: 0;
+    }
+    #{$t4} {
+        z-index: -1;
+        left: 0;
+        opacity: 0;
+    }
+    #{$t5} {
+        left: 0;
+        z-index: 0;
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+    }
+}

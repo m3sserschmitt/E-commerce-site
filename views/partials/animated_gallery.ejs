@@ -1,0 +1,13 @@
+<section id="animated-gallery" class="a-gallery">
+    <% let gallery = locals.galleryPictures.slice(0, locals.animGalleryCount) %>
+    <% for(let picture of gallery) { %>
+        <figure>
+            <picture>
+                <img src="<%- picture.normal %>" alt="<%- picture.normal %>" />
+            </picture>
+            <figcaption>
+                <%-picture.description%>
+            </figcaption>
+        </figure>
+        <% } %>
+</section>

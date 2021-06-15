@@ -1,0 +1,103 @@
+body {
+  --menu-height: 2rem;
+  margin-top: var(--menu-height);
+}
+
+nav {
+  color: var(--light-grey);
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+  top: 0;
+  height: var(--menu-height);
+  background-color: var(--third-color);
+}
+nav #theme-switch {
+  display: none;
+  max-width: calc(var(--menu-height));
+  max-height: auto;
+}
+nav label,
+nav input {
+  display: none;
+}
+nav a {
+  text-decoration: none;
+  color: var(--light-grey);
+}
+nav a span {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+nav ul.menu {
+  background-color: var(--third-color);
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  margin: 0;
+  padding: 0;
+}
+nav ul.menu li {
+  text-align: center;
+  list-style-type: none;
+  cursor: pointer;
+  flex-basis: 15%;
+  height: var(--menu-height);
+  line-height: var(--menu-height);
+  transition: 0.4s;
+}
+nav ul.menu li a img {
+  height: 1rem;
+  transition: 0.4s;
+}
+nav ul.menu li:hover {
+  transition: 0.4s;
+}
+nav ul.menu li:hover a img {
+  height: 1.2rem;
+  transition: 0.4s;
+}
+nav ul.menu li:hover .menu-subsection {
+  display: block;
+  animation-name: show-sub-menu;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-duration: 0.3s;
+  animation-timing-function: linear;
+}
+nav ul.menu > li:hover {
+  font-size: 1.2rem;
+}
+nav .menu-subsection {
+  padding: 0;
+  display: none;
+  background-color: var(--third-color);
+  width: 100%;
+  font-size: 1rem;
+}
+nav .menu-subsection li {
+  display: flex;
+  justify-content: space-between;
+}
+nav .menu-subsection li div {
+  display: inline-block;
+  height: 0;
+  width: 7px;
+  transition: 0.3s;
+  background: linear-gradient(to left, var(--primary-color), var(--light-grey));
+}
+nav .menu-subsection li:hover div {
+  height: 100%;
+  transition: 0.3s;
+}
+
+@keyframes show-sub-menu {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/*# sourceMappingURL=nav.css.map */

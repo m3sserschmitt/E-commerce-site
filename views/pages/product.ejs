@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head') %>
+
+        <link rel="stylesheet" href="/public/stylesheets/product.css" type="text/css">
+        <link rel="stylesheet" href="/public/stylesheets/product-details.css" type="text/css">
+
+        <title>
+            <%- locals.product.product_name %> - TechAltar
+        </title>
+</head>
+
+<body>
+    <header>
+        <%- include ('../partials/nav') %>
+
+            <h1 class="product-name">
+                <span class="name-value">
+                    <%- locals.product.product_name %>
+                </span>
+            </h1>
+
+    </header>
+
+    <main>
+        <section id="product-details">
+            <h2>Product Details</h2>
+
+            <article class="product">
+
+                <figure id="product-image" class="product-figure">
+                    <img class="product-image" src="/public/pictures/gallery/<%= locals.product.product_image %>">
+                </figure>
+
+                <div id="product-specs" class="specifications">
+
+                    <ul class="product-characteristics-list">
+                        <li class="product-price">Price: <span class="price-value">
+                                <%-locals.product.price%> USD
+                            </span>
+                        </li>
+
+                        <li class="product-category"> Category: <span class="category-value">
+                                <%- locals.product.category %>
+                            </span>
+                        </li>
+
+                        <li class="product-brand"> Brand: <span class="brand-value">
+                                <%- locals.product.brand %>
+                            </span>
+                        </li>
+
+                        <li class="product-chipset"> Chipset:
+                            <span class="chipset-value">
+                                <%- locals.product.chipset %>
+                            </span>
+                        </li>
+
+                        <li class="product-color">Color:
+                            <span class="color-value">
+                                <%- locals.product.color %>
+                            </span>
+                        </li>
+
+                        <li class="product-weight"> Weight:
+                            <span class="weight-value">
+                                <%- locals.product.product_weight %> KG
+                            </span>
+                        </li>
+
+                        <li class="product-release"> Release date:
+                            <time class="release-value">
+                                <%- locals.product.release_date.toDateString() %>
+                            </time>
+                        </li>
+                    </ul>
+
+                    <p class="product-returnable">
+                        <span class="returnable-value">
+                            <% if(locals.product.returnable) { %>
+                                This product can be returned according to our return policy.
+                                <% } else { %>
+                                    You cannot return this product.
+                                    <% } %>
+                        </span>
+                    </p>
+
+                </div>
+
+                <div id="product-description">
+                    <h3>Description</h3>
+                    <p class="product-description">
+                        <%- locals.product.product_description %>
+                    </p>
+                </div>
+
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <%- include ('../partials/footer') %>
+    </footer>
+
+</body>
+
+</html>

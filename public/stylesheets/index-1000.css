@@ -1,0 +1,31 @@
+/* html
+{
+    font-size: 14px;
+} */
+
+#main-grid
+{
+    display: grid;
+
+    grid-template-areas: "presentation   presentation   presentation  presentation"
+                         "statistics     statistics     statistics    statistics"
+                         "online-users   online-users   site-info     site-info"
+                         "events         events         main-table    main-table"
+                         "announcements  announcements  main-table    main-table"
+                         "others         others         others        others";
+}
+
+#banner {
+    display: none;
+}
+
+
+
+#animated-gallery-section {
+    display: none;
+}
+
+#animated-gallery-menu-option
+{
+    display: none;
+}

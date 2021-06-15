@@ -1,0 +1,122 @@
+#animated-gallery-section {
+  display: flex;
+  justify-content: center;
+}
+
+.a-gallery {
+  position: relative;
+  overflow: hidden;
+  width: 640px;
+  height: 426px;
+}
+
+.a-gallery figure {
+  position: relative;
+  width: 640px;
+  height: 426px;
+  margin: 0;
+}
+.a-gallery figcaption {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  opacity: 1;
+  background-color: rgba(var(--primary-color-rgb), 0.75);
+  font-weight: 600;
+}
+
+#animated-gallery {
+  border: 8px solid var(--secondary-color);
+}
+#animated-gallery figure {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 0;
+  animation-name: gallery-animation;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
+  animation-duration: 24s;
+}
+
+#animated-gallery:hover figure {
+  animation-play-state: paused;
+}
+
+#animated-gallery figure:nth-of-type(1) {
+  display: block;
+  animation-delay: 21s;
+}
+
+#animated-gallery figure:nth-of-type(2) {
+  display: block;
+  animation-delay: 18s;
+}
+
+#animated-gallery figure:nth-of-type(3) {
+  display: block;
+  animation-delay: 15s;
+}
+
+#animated-gallery figure:nth-of-type(4) {
+  display: block;
+  animation-delay: 12s;
+}
+
+#animated-gallery figure:nth-of-type(5) {
+  display: block;
+  animation-delay: 9s;
+}
+
+#animated-gallery figure:nth-of-type(6) {
+  display: block;
+  animation-delay: 6s;
+}
+
+#animated-gallery figure:nth-of-type(7) {
+  display: block;
+  animation-delay: 3s;
+}
+
+#animated-gallery figure:nth-of-type(8) {
+  display: block;
+  animation-delay: 0s;
+}
+
+@keyframes gallery-animation {
+  0% {
+    z-index: 1;
+    left: 0;
+    opacity: 1;
+  }
+  4.1666666667% {
+    left: 25%;
+    opacity: 1;
+  }
+  6.25% {
+    left: -25%;
+    opacity: 0.4;
+  }
+  7.5% {
+    left: 100%;
+    opacity: 0;
+  }
+  87.5% {
+    z-index: -1;
+    left: 0;
+    opacity: 0;
+  }
+  87.50001% {
+    left: 0;
+    z-index: 0;
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/*# sourceMappingURL=animated-gallery.css.map */

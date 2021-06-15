@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head') %>
+        <link rel="stylesheet" href="/public/stylesheets/store.css" type="text/css">
+        <link rel="stylesheet" href="/public/stylesheets/product-details.css" type="text/css">
+
+        <title>Store</title>
+</head>
+
+<body>
+    <header>
+        <%- include ('../partials/nav') %>
+    </header>
+
+    <main>
+
+        <label id="filter-switch-button" for="filters-switch">
+            <img src="/public/pictures/filter.png">
+        </label>
+
+
+        <input type="checkbox" id="filters-switch">
+
+        <section id="filters-section">
+            <h2>Filters</h2>
+
+            <section id="filters-grid">
+                <section class="filter-section" id="brand-filter">
+                    <h4>Select product brand.</h4>
+
+                    <fieldset class="input-group" id="brand-filter-group">
+                        <label>
+                            All
+                            <input class="brand-filter-input" id="default-brand-filter-input" name="brand-filter-group"
+                                value="all" type="checkbox" checked="checked">
+                        </label>
+                        <% for(let brand of locals.brands) { %>
+
+                            <label>
+                                <%- brand %>
+                                    <input class="brand-filter-input" value="<%- brand %>" type="checkbox"
+                                        name="brand-filter-group">
+                            </label>
+                            <% } %>
+                    </fieldset>
+                </section>
+
+                <section class="filter-section" id="returnable-filter">
+                    <h4>Returnable or non-returnable product?</h4>
+
+                    <fieldset class="input-group" id="returnable-filter-group">
+                        <label>
+                            All
+                            <input class="returnable-filter-input" id="default-returnable-filter-input" type="radio"
+                                name="returnable-filter-group" value="all" checked="checked">
+                        </label>
+                        <label>
+                            Returnable
+                            <input class="returnable-filter-input" type="radio" name="returnable-filter-group"
+                                value="returnable">
+                        </label>
+                        <label>
+                            Non-returnable
+                            <input class="returnable-filter-input" type="radio" name="returnable-filter-group"
+                                value="non-returnable">
+                        </label>
+                    </fieldset>
+                </section>
+
+                <section class="filter-section" id="price-filter">
+                    <h4>Choose product price range.</h4>
+                    <label> <span>Price Range:</span>
+
+                        <% let rangeLen=10;%>
+                            <% while (rangeLen <=locals.maxPrice) { rangeLen *=10; } %>
+                                <% rangeLen /=10; %>
+                                    <select multiple id="price-filter-selector">
+                                        <option class="price-filter-selector" id="default-price-filter-selector"
+                                            name="price-filter-selector" value="-Infinity Infinity" selected="selected">
+                                            All</option>
+                                        <% let i=0; %>
+                                            <% for(; (i / rangeLen < 5) && (i < locals.maxPrice); i +=rangeLen) { %>
+                                                <option class="price-filter-selector" name="price-filter-selector"
+                                                    value="<%- i %> <%- i + rangeLen%>">
+                                                    <%- i %>-<%- i + rangeLen %>
+                                                </option>
+                                                <% } %>
+                                                    <option class="price-filter-selector" name="price-filter-selector"
+                                                        value="<%- i %> Infinity"> > <%- i %>
+                                                    </option>
+                                    </select>
+                    </label>
+                </section>
+            </section>
+
+            <section id="filter-buttons-section">
+                <button class="filter-button" id="apply-filters-button">Apply Filters</button>
+                <button class="filter-button" id="reset-filters-button">Reset Filters</button>
+                <button class="filter-button" id="ascending-price-button">Ascending Price</button>
+                <button class="filter-button" id="descending-price-button">Descending Price</button>
+            </section>
+
+        </section>
+
+        <section id="products-section">
+            <h2>Products</h2>
+
+            <section id="products-grid">
+                <% for( let product of locals.products) { %>
+                    <article class="product">
+
+                        <h3 class="product-name">
+                            <a href="/product?id=<%-product.product_id %>">
+                                <span class="name-value">
+                                    <%- product.product_name%>
+                                </span>
+                            </a>
+                        </h3>
+
+                        <p class="product-category">
+                            <span class="category-value">
+                                <%- product.category%>
+                            </span>
+                        </p>
+
+                        <a class="product-link-image" href="/product?id=<%-product.product_id %>">
+                            <figure class="product-figure">
+                                <img class="product-image" src="/public/pictures/gallery/<%= product.product_image %>"
+                                    alt="[imagine <%- product.product_name %>]" />
+                            </figure>
+                        </a>
+
+                        <ul class="product-characteristics-list">
+                            <li class="product-price"> Price:
+                                <span class="price-value">
+                                    <%- product.price%> USD
+                                </span>
+                            </li>
+
+                            <li class="product-brand"> Brand:
+                                <span class="brand-value">
+                                    <%- product.brand %>
+                                </span>
+                            </li>
+
+                            <li class="product-chipset"> Chip set:
+                                <span class="chipset-value">
+                                    <%- product.chipset %>
+                                </span>
+                            </li>
+
+                            <li class="product-release"> Release date:
+                                <time class="release-value">
+                                    <%- product.release_date.toDateString() %>
+                                </time>
+                            </li>
+
+                            <li class="product-returnable">
+                                <span class="returnable-value">
+                                    <% if(product.returnable) { %>
+                                        Returnable
+                                        <% } else { %>
+                                            Non-returnable
+                                            <% }%>
+                                </span>
+                            </li>
+                        </ul>
+
+                    </article>
+                    <% }%>
+            </section>
+
+        </section>
+    </main>
+
+    <footer>
+        <%- include ('../partials/footer') %>
+    </footer>
+
+    <script src="/public/js/store.js"></script>
+</body>
+
+</html>

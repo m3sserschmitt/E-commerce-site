@@ -1,0 +1,14 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - var(--menu-height));
+}
+
+main {
+    flex-grow: 1;
+}
+
+h1 {
+    text-align: center;
+    text-transform: uppercase;
+}

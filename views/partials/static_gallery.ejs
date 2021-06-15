@@ -1,0 +1,21 @@
+<section class="static-gallery-grid">
+
+    <% for(let i=0; i < locals.galleryPictures.length && i <= 12; i ++) { %>
+        <% if(i==4 || i==9) {%>
+            <figure class="gallery-placeholder"></figure>
+            <% } %>
+
+                <figure>
+                    <% let picture=locals.galleryPictures[i];%>
+                        <picture>
+                            <source srcset="<%- picture.small %>" media="(max-width:576px)" />
+                            <source srcset="<%- picture.medium %>" media="(max-width:1000px)" />
+                            <img src="<%- picture.normal %>" alt="/<%- picture.normal %>" />
+                        </picture>
+                        <figcaption>
+                            <%-picture.description%>
+                        </figcaption>
+
+                </figure>
+                <% } %>
+</section>

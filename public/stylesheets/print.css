@@ -1,0 +1,77 @@
+@media print {
+    *{
+        color: black;
+    }
+
+    iframe,
+    img,
+    .static-gallery-grid,
+    div.iframe-section,
+    figure,
+    figcaption,
+    #top-link,
+    #animated-gallery-section,
+    #animated-gallery,
+    #static-gallery-section
+    {
+        display: none;
+    }
+
+    header h1 {
+        color: black;
+    }
+
+    nav {
+        position: static;
+        page-break-after: always;
+    }
+
+    nav ul.menu {
+        color: black;
+        display: block;
+    }
+
+    nav ul.menu li {
+        height: auto;
+    }
+
+    nav ul.menu li a {
+        color: black;
+    }
+
+    nav ul.menu .menu-subsection {
+        display: block;
+    }
+
+    footer {
+        page-break-before: always;
+        margin-bottom: 50px;
+    }
+
+    #watermark {
+        page-break-before: always;
+        display: block;
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        width: 60%;
+    }
+
+    /* #banner {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        width: 50%;
+
+        animation-name: none !important;
+    }
+
+    * {
+        -webkit-animation: none !important;
+        -moz-animation: none !important;
+        -o-animation: none !important;
+        -ms-animation: none !important;
+        animation: none !important;
+    } */
+}

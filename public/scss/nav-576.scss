@@ -1,0 +1,60 @@
+nav {
+    .menu-subsection {
+        display: block;
+    }
+
+    label {
+        display: flex;
+        align-items: center;
+        padding-left: 7px;
+        height: 100%;
+
+        img {
+            height: 1.2rem;
+            width: 1.2rem;
+        }
+    }
+
+    a span {
+        display: none;
+    }
+
+    ul.menu {
+        display: none;
+
+        li {
+            height: auto;
+
+            .menu-subsection {
+                li:hover {
+                    font-size: 1.2rem;
+                    transition: .3s;
+                }
+            }
+        }
+
+        li:hover {
+            .menu-subsection {
+                animation-duration: 0s;
+            }
+        }
+    }
+
+    #menu-switch:checked + ul.menu {
+        display: block;
+        animation-name: show-menu;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+        animation-duration: 0.3s;
+        animation-timing-function: linear;
+    }
+}
+
+@keyframes show-menu {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
