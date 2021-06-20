@@ -32,8 +32,4 @@ function switchTheme() {
   localStorage.setItem('theme', selectedTheme);
 }
 
-window.onload = () => {
-  document.getElementById('theme-switch').onclick = () => {
-    switchTheme();
-  }
-}
+

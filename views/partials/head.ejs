@@ -21,4 +21,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Pattaya&display=swap" rel="stylesheet">
 
 <script src="/public/js/theme.js"></script>
+<script src="/public/js/cart_total.js"></script>
 
+<script>
+    window.onload = () => {
+        document.getElementById('theme-switch').onclick = () => {
+            switchTheme();
+        }
+
+        calculateCartTotal();
+    }
+    
+</script>

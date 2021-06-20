@@ -28,7 +28,7 @@
         <section id="product-details">
             <h2>Product Details</h2>
 
-            <article class="product">
+            <article id="<%- locals.product.product_id %>" class="product">
 
                 <figure id="product-image" class="product-figure">
                     <img class="product-image" src="/public/pictures/gallery/<%= locals.product.product_image %>">
@@ -75,17 +75,23 @@
                                 <%- locals.product.release_date.toDateString() %>
                             </time>
                         </li>
+
+                        <p class="product-returnable">
+                            <span class="returnable-value">
+                                <% if(locals.product.returnable) { %>
+                                    This product can be returned according to our return policy.
+                                    <% } else { %>
+                                        You cannot return this product.
+                                        <% } %>
+                            </span>
+                        </p>
                     </ul>
 
-                    <p class="product-returnable">
-                        <span class="returnable-value">
-                            <% if(locals.product.returnable) { %>
-                                This product can be returned according to our return policy.
-                                <% } else { %>
-                                    You cannot return this product.
-                                    <% } %>
-                        </span>
-                    </p>
+                    <div class="product-buttons-container">
+                        <p class="added-to-cart-flag">Added to cart</p>
+
+                        <button value="<%-product.product_id%>" class="dark-button add-cart-button">Add to cart</button>
+                    </div>
 
                 </div>
 
@@ -103,6 +109,8 @@
     <footer>
         <%- include ('../partials/footer') %>
     </footer>
+
+    <script src="/public/js/cart.js"></script>
 
 </body>
 

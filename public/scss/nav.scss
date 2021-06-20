@@ -9,13 +9,29 @@ body {
 nav {
     #theme-switch {
         display: none;
-        max-width: calc(var(--menu-height));
+        max-width: calc(var(--menu-height) * 8 / 10);
         max-height: auto;
+    }
+
+    #cart-button {
+        max-width: calc(var(--menu-height) * 8 / 10);
+        max-height: auto;
+    }
+
+    #cart-items-count {
+        font-weight: bold;
+        font-size: x-small;
+    }
+
+    #cart-menu-subsection li {
+        display: block;
+        text-align: center;
+        font-size: small;
     }
 
     color: var(--light-grey);
     position: fixed;
-    z-index: 100;
+    z-index: 1000;
     width: 100%;
     top: 0;
 

@@ -2,9 +2,9 @@
     list-style-type: none;
 }
 
-.product-price, 
-.product-category, 
-.product-color, 
+.product-price,
+.product-category,
+.product-color,
 .product-weight,
 .product-release,
 .product-chipset,
@@ -19,9 +19,9 @@
     padding-right: 10px;
 }
 
-.price-value, 
-.category-value, 
-.color-value, 
+.price-value,
+.category-value,
+.color-value,
 .name-value,
 .weight-value,
 .release-value,
@@ -35,8 +35,8 @@
     font-size: small;
 }
 
-.category-value, 
-.color-value, 
+.category-value,
+.color-value,
 .release-value,
 .chipset-value,
 .brand-value {
@@ -51,7 +51,33 @@
 
 .product-image {
     border-radius: 0.35rem;
-    
+
     width: 100%;
     height: auto;
+}
+
+.product-buttons-container {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.5rem;
+}
+
+.dark-button {
+    border-radius: 0.3rem;
+    background-color: var(--secondary-color);
+    color: var(--light-blue);
+    text-transform: uppercase;
+    font-weight: 700;
+    min-height: 1.5rem;
+    margin-left: 0.7rem;
+    margin-right: 0.7rem;
+}
+
+.added-to-cart-button {
+    background-color: var(--light-blue);
+    color: var(--secondary-color);
+}
+
+.added-to-cart-flag {
+    display: none;
 }

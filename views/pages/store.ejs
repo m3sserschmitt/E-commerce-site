@@ -16,15 +16,18 @@
 
     <main>
 
-        <label id="filter-switch-button" for="filters-switch">
+        <div id="filter-switch-button">
             <img src="/public/pictures/filter.png">
-        </label>
-
-
-        <input type="checkbox" id="filters-switch">
+        </div>
 
         <section id="filters-section">
             <h2>Filters</h2>
+
+            <div id="search-bar">
+                <input type="text" name="search-bar-input" id="search-bar-input"
+                    placeholder="Search here for your favorite products">
+                <button id="search-button" class="dark-button">Search</button>
+            </div>
 
             <section id="filters-grid">
                 <section class="filter-section" id="brand-filter">
@@ -96,10 +99,10 @@
             </section>
 
             <section id="filter-buttons-section">
-                <button class="filter-button" id="apply-filters-button">Apply Filters</button>
-                <button class="filter-button" id="reset-filters-button">Reset Filters</button>
-                <button class="filter-button" id="ascending-price-button">Ascending Price</button>
-                <button class="filter-button" id="descending-price-button">Descending Price</button>
+                <button class="dark-button" id="apply-filters-button">Apply Filters</button>
+                <button class="dark-button" id="reset-filters-button">Reset Filters</button>
+                <button class="dark-button" id="ascending-price-button">Ascending Price</button>
+                <button class="dark-button" id="descending-price-button">Descending Price</button>
             </section>
 
         </section>
@@ -109,7 +112,7 @@
 
             <section id="products-grid">
                 <% for( let product of locals.products) { %>
-                    <article class="product">
+                    <article id="<%-product.product_id %>" class="product">
 
                         <h3 class="product-name">
                             <a href="/product?id=<%-product.product_id %>">
@@ -168,6 +171,14 @@
                             </li>
                         </ul>
 
+                        <div class="product-buttons-container">
+                            <p class="added-to-cart-flag">Added to cart</p>
+
+                            <button value="<%-product.product_id%>" class="dark-button add-cart-button">Add to
+                                cart</button>
+                        </div>
+
+
                     </article>
                     <% }%>
             </section>
@@ -180,6 +191,7 @@
     </footer>
 
     <script src="/public/js/store.js"></script>
+    <script src="/public/js/cart.js"></script>
 </body>
 
 </html>

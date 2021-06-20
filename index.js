@@ -92,6 +92,48 @@ app.get('/store', (req, res) => {
   });
 });
 
+/*
+  app.get('/products', (req, res) => {
+  let productCategory = req.query.category;
+  let searchQuery = req.query.query;
+
+  const productsDetails = 'product_id, product_name, price, product_image, category, brand, release_date, returnable, chipset';
+  const DBQuery = `select ${productsDetails} from product where 1=1`;
+
+  if(productCategory) {
+    DBQuery += ` and category = ${productCategory}`;
+  }
+
+  if(searchQuery) {
+    let searchQueryTokens = searchQuery.split(',')
+    .map(token => token.trim().toLowerCase())
+    .filter(token => token.length);
+
+    for(let queryToken of searchQuery) {
+      DBQuery += ''
+    }
+  }
+    // `select ${productsDetails} from product where category = '${productCategory}';`;
+
+  client.query(DBQuery, (err, products) => {
+    if (!err) {
+      client.query('SELECT unnest(enum_range(NULL::product_brand));', (err, brands) => {
+        if (!err) {
+          client.query('select max(price) from product;', (err, maxPrice) => {
+            if (!err) {
+              res.render('pages/store', {
+                products: products.rows,
+                brands: brands.rows.map(brand => brand.unnest),
+                maxPrice: maxPrice.rows[0].max
+              });
+            }
+          });
+        }
+      });
+    }
+  });
+});
+*/
 app.get('/product', (req, res) => {
   let product_id = req.query.id;
 

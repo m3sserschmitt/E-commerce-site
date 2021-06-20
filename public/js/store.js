@@ -1,8 +1,30 @@
+// filter switch functionality;
+document.getElementById('filter-switch-button').addEventListener('click', ev => {
+  var filtersSection = document.getElementById('filters-section');
+  var searchBar = document.getElementById('search-bar');
+
+  if (!filtersSection.style.height || ['0px', '0'].includes(filtersSection.style.height)) {
+    filtersSection.style.height = 'auto';
+  } else {
+    filtersSection.style.height = '0px';
+  }
+
+  if (searchBar.style.display === 'none') {
+    searchBar.style.display = 'flex';
+  } else {
+    searchBar.style.display = 'none';
+  }
+
+});
+
+// return checkable filters by class
 function getCheckFilterByClass(class_name) {
   const inputs = Array.from(document.getElementsByClassName(class_name));
   return inputs.filter(input => input.checked).map(checkedInput => checkedInput.defaultValue);
 }
 
+// filter = 'brand' => list of brands;
+// filter = 'returnable' => 'all' or 'returnable' or 'non-returnable';
 function getCheckFilters(filter) {
   switch (filter) {
     case 'brand':
@@ -12,17 +34,56 @@ function getCheckFilters(filter) {
   }
 }
 
+// return required price
 function getPriceFilter() {
   const priceRange = document.getElementById('price-filter-selector').value;
   return priceRange.trim().split(' ');
 }
 
+// return search keywords from searchbar
+function getSearchKeywords() {
+  let searchBar = document.getElementById('search-bar-input');
+  return searchBar.value.split(' ').filter(word => word.length).map(word => word.toLowerCase());
+}
+
+// check if product has required keywords
+function checkKeywords(product, keywords) {
+  if (!keywords.length) {
+    return true;
+  }
+
+  let productName = product.getElementsByClassName('name-value')[0].innerText.trim().toLowerCase();
+  let specs = product.getElementsByClassName('chipset-value')[0].innerText.trim().toLowerCase();
+
+  for (let keyword of keywords) {
+    let condition = (productName + ', ' + specs).includes(keyword.slice(1));
+
+    if (((keyword[0] === '+') && !condition) || ((keyword[0] === '-') && condition)) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+// search button functionality
+document.getElementById('search-button').addEventListener('click', ev => {
+  let keywords = getSearchKeywords();
+  const products = Array.from(document.getElementsByClassName('product'));
+
+  for (let product of products) {
+    product.style.display = checkKeywords(product, keywords) ? 'block' : 'none';
+  }
+});
+
+// apply-filters button;
 document.getElementById('apply-filters-button').addEventListener('click', ev => {
   const products = Array.from(document.getElementsByClassName('product'));
 
   const requiredBrands = getCheckFilters('brand');
   const requiredReturnPolicy = getCheckFilters('returnable');
   const requiredPrices = getPriceFilter();
+  const searchKeywords = getSearchKeywords();
 
   for (product of products) {
     let productBrand = product.getElementsByClassName('brand-value')[0].innerText.trim().toLowerCase();
@@ -32,13 +93,15 @@ document.getElementById('apply-filters-button').addEventListener('click', ev => 
     let condition1 = requiredBrands.includes('all') || requiredBrands.includes(productBrand);
     let condition2 = requiredReturnPolicy.includes('all') || requiredReturnPolicy.includes(productReturnPolicy);
     let condition3 = requiredPrices[0] < productPrice && productPrice < requiredPrices[1];
+    let condition4 = checkKeywords(product, searchKeywords);
 
-    let result = condition1 && condition2 && condition3;
+    let result = condition1 && condition2 && condition3 && condition4;
 
     product.style.display = result ? 'block' : 'none';
   }
 });
 
+// reset filters button;
 document.getElementById('reset-filters-button').addEventListener('click', ev => {
   // reset brand filter;
   Array.from(document.getElementsByClassName('brand-filter-input')).forEach(input => input.checked = false);
@@ -50,8 +113,15 @@ document.getElementById('reset-filters-button').addEventListener('click', ev => 
   // reset price filter;
   Array.from(document.getElementsByClassName('price-filter-selector')).forEach(input => input.selected = false);
   document.getElementById('default-price-filter-selector').selected = true;
+
+  //set all products to be visible;
+  const products = Array.from(document.getElementsByClassName('product'));
+  for (product of products) {
+    product.style.display = 'block';
+  }
 });
 
+// compare products by price and color;
 function compare_products(product1, product2) {
   let price1 = parseInt(product1.getElementsByClassName('price-value')[0].innerText.trim());
   let price2 = parseInt(product2.getElementsByClassName('price-value')[0].innerText.trim());
@@ -72,6 +142,7 @@ function compare_products(product1, product2) {
   return price1 - price2;
 }
 
+// sort products using 'sort_function' as a sorting method;
 function sort_products(sort_function) {
   let products = Array.from(document.getElementsByClassName('product'));
   products.sort(sort_function);
