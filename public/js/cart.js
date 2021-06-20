@@ -1,8 +1,7 @@
 let cart = { ...JSON.parse(localStorage.getItem('cart')) };
 
-
 for (let item in cart) {
-  let product = document.getElementById(item);
+  let product = document.getElementById(`article_${ item }`);
 
   if (!product) {
     continue;

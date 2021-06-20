@@ -1,3 +1,4 @@
+// calculate chart total sum;
 function calculateCartTotal() {
   let cart = { ...JSON.parse(localStorage.getItem('cart')) };
   let total = 0;

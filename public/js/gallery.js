@@ -98,7 +98,7 @@ function getGallery(jsonPath, categories, maxCount, dimensions) {
 function recompileGalleryCSS(gallerySCSS, tempDir, sass, css) {
   let SCSS = fs.readFileSync(gallerySCSS).toString('utf-8');
 
-  let picturesCount = 6 + (Math.floor(Math.random() * 7));
+  let picturesCount = 6 + (Math.floor(Math.random() * 4) * 2);
   let newSCSS = ejs.render(SCSS, { count: picturesCount });
 
   let renderedSCSSPath = `${tempDir}/${path.basename(gallerySCSS)}`;

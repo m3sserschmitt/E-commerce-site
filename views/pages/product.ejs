@@ -5,7 +5,7 @@
     <%- include('../partials/head') %>
 
         <link rel="stylesheet" href="/public/stylesheets/product.css" type="text/css">
-        <link rel="stylesheet" href="/public/stylesheets/product-details.css" type="text/css">
+        <link rel="stylesheet" href="/public/stylesheets/store-product.css" type="text/css">
 
         <title>
             <%- locals.product.product_name %> - TechAltar
@@ -28,7 +28,7 @@
         <section id="product-details">
             <h2>Product Details</h2>
 
-            <article id="<%- locals.product.product_id %>" class="product">
+            <article id="article_<%- locals.product.product_id %>" class="product">
 
                 <figure id="product-image" class="product-figure">
                     <img class="product-image" src="/public/pictures/gallery/<%= locals.product.product_image %>">

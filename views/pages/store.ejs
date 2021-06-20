@@ -4,7 +4,7 @@
 <head>
     <%- include('../partials/head') %>
         <link rel="stylesheet" href="/public/stylesheets/store.css" type="text/css">
-        <link rel="stylesheet" href="/public/stylesheets/product-details.css" type="text/css">
+        <link rel="stylesheet" href="/public/stylesheets/store-product.css" type="text/css">
 
         <title>Store</title>
 </head>
@@ -112,7 +112,7 @@
 
             <section id="products-grid">
                 <% for( let product of locals.products) { %>
-                    <article id="<%-product.product_id %>" class="product">
+                    <article id="article_<%-product.product_id %>" class="product">
 
                         <h3 class="product-name">
                             <a href="/product?id=<%-product.product_id %>">

@@ -101,13 +101,6 @@ header h1 {
     grid-area: others;
 }
 
-/* @media screen and (min-width: 1000px)
-{
-    #animated-gallery-section {
-        display: none;
-    }
-} */
-
 .iframe-section {
     display: flex;
     background-color: var(--third-color);

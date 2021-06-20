@@ -34,13 +34,14 @@ function getCheckFilters(filter) {
   }
 }
 
-// return required price
+// return required prices;
 function getPriceFilter() {
-  const priceRange = document.getElementById('price-filter-selector').value;
-  return priceRange.trim().split(' ');
+  return Array.from(document.querySelectorAll('#price-filter-selector option:checked')).map(input => 
+    input.value.trim().split(' ')
+  );
 }
 
-// return search keywords from searchbar
+// return search keywords from searchbar;
 function getSearchKeywords() {
   let searchBar = document.getElementById('search-bar-input');
   return searchBar.value.split(' ').filter(word => word.length).map(word => word.toLowerCase());
@@ -66,6 +67,19 @@ function checkKeywords(product, keywords) {
   return true;
 }
 
+// check if product is into correct price range;
+function checkPriceRange(product, priceRanges) {
+  let productPrice = parseInt(product.getElementsByClassName('price-value')[0].innerText.trim());
+
+  for(let priceRange of priceRanges) {
+    if(priceRange[0] <= productPrice && productPrice <= priceRange[1]) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 // search button functionality
 document.getElementById('search-button').addEventListener('click', ev => {
   let keywords = getSearchKeywords();
@@ -88,11 +102,10 @@ document.getElementById('apply-filters-button').addEventListener('click', ev => 
   for (product of products) {
     let productBrand = product.getElementsByClassName('brand-value')[0].innerText.trim().toLowerCase();
     let productReturnPolicy = product.getElementsByClassName('returnable-value')[0].innerText.trim().toLowerCase();
-    let productPrice = parseInt(product.getElementsByClassName('price-value')[0].innerText.trim());
 
     let condition1 = requiredBrands.includes('all') || requiredBrands.includes(productBrand);
     let condition2 = requiredReturnPolicy.includes('all') || requiredReturnPolicy.includes(productReturnPolicy);
-    let condition3 = requiredPrices[0] < productPrice && productPrice < requiredPrices[1];
+    let condition3 = checkPriceRange(product, requiredPrices);
     let condition4 = checkKeywords(product, searchKeywords);
 
     let result = condition1 && condition2 && condition3 && condition4;
