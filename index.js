@@ -26,7 +26,7 @@ const pool = new Pool({
 // });
 // client.connect();
 
-const client = await pool.connect();
+const client = pool.connect();
 
 const app = express();
 app.use(expressSession({
