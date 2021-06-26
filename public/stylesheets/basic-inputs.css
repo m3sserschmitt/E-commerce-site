@@ -1,0 +1,25 @@
+.basic-button {
+    border-radius: 0.3rem;
+    background-color: var(--secondary-color);
+    color: var(--light-blue);
+    text-transform: uppercase;
+    font-weight: 700;
+    min-height: 1.5rem;
+    margin-left: 0.7rem;
+    margin-right: 0.7rem;
+}
+
+.basic-text-input {
+    background-color: var(--primary-color);
+    color: var(--light-grey);
+    font-weight: 800;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border: 1px solid var(--light-grey);
+    border-radius: 0.7rem;
+    font-size: large;
+}
+
+.basic-text-input:focus {
+    outline-width: 0;
+}

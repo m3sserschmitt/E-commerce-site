@@ -97,24 +97,13 @@ main {
 
 #search-bar-input {
     flex-basis: 65%;
-    background-color: var(--primary-color);
-    color: var(--light-grey);
-    font-weight: 800;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    border: 1px solid var(--light-grey);
-    border-radius: 0.7rem;
-    min-height: calc(var(--search-bar-height) - 1.5vh);
+    min-height: calc(var(--search-bar-height) - 1.5vh); 
 }
 
 #search-bar-input::placeholder {
     color: var(--light-green);
     opacity: 0.35;
     text-align: center;
-}
-
-#search-bar-input:focus {
-    outline-width: 0;
 }
 
 #filters-grid {
@@ -143,7 +132,7 @@ main {
 }
 
 @media screen and (max-width: 1000px) {
-    .dark-button {
+    .basic-button {
         font-weight: normal;
         font-size: smaller;
 
@@ -153,7 +142,7 @@ main {
 }
 
 @media screen and (max-width: 576px) {
-    .dark-button {
+    .basic-button {
         margin: 0;
     }
 }

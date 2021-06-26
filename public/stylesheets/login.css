@@ -1,0 +1,8 @@
+#login-section {
+    background-color: var(--secondary-color);
+    text-align: right;
+}
+
+#login-section label {
+    color: var(--light-grey);
+}

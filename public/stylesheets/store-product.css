@@ -62,17 +62,6 @@
     padding: 0.5rem;
 }
 
-.dark-button {
-    border-radius: 0.3rem;
-    background-color: var(--secondary-color);
-    color: var(--light-blue);
-    text-transform: uppercase;
-    font-weight: 700;
-    min-height: 1.5rem;
-    margin-left: 0.7rem;
-    margin-right: 0.7rem;
-}
-
 .added-to-cart-button {
     background-color: var(--light-blue);
     color: var(--secondary-color);

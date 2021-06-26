@@ -1,0 +1,52 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - var(--menu-height));
+}
+
+main {
+    flex-grow: 1;
+    background-size: 100% 100%;
+}
+
+header h1 {
+    color: var(--light-grey);
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+#register-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.basic-form {
+    padding: 1rem;
+    background-color: var(--secondary-color);
+    border-radius: 1rem;
+}
+
+.form-entry {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-entry label {
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+.basic-form label, .basic-form input {
+    margin: .5rem;
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: inherit;
+}
+
+#submit-form {
+
+    align-self: center;
+}

@@ -24,55 +24,91 @@
                     <% } %>
             </ul>
         </li>
-        <li><a href="/register">Register</a></li>
-        <li><a href="/login">Login</a></li>
 
-        <li>
-            <div>Gallery</div>
-            <ul class="menu-subsection">
+        <% if(!locals.user) { %>
+            <li><a href="/register">Register</a></li>
+            <% } %>
+
                 <li>
-                    <div></div><a href="/static_gallery">Static</a>
-                    <div></div>
+                    <div>Gallery</div>
+                    <ul class="menu-subsection">
+                        <li>
+                            <div></div><a href="/static_gallery">Static</a>
+                            <div></div>
+                        </li>
+                        <li id="animated-gallery-menu-option">
+                            <div></div><a href="/animated_gallery">Animated</a>
+                            <div></div>
+                        </li>
+                    </ul>
                 </li>
-                <li id="animated-gallery-menu-option">
-                    <div></div><a href="/animated_gallery">Animated</a>
-                    <div></div>
-                </li>
-            </ul>
-        </li>
 
-        <li>
-            <a href="/terms">Legal</a>
-            <ul class="menu-subsection">
                 <li>
-                    <div></div><a href="/terms#terms">Terms</a>
-                    <div></div>
+                    <a href="/terms">Legal</a>
+                    <ul class="menu-subsection">
+                        <li>
+                            <div></div><a href="/terms#terms">Terms</a>
+                            <div></div>
+                        </li>
+                        <li>
+                            <div></div><a href="/terms#privacy">Privacy</a>
+                            <div></div>
+                        </li>
+                    </ul>
                 </li>
+
                 <li>
-                    <div></div><a href="/terms#privacy">Privacy</a>
-                    <div></div>
+                    <a href="/cart">
+                        <img id="cart-button" src="/public/pictures/cart-73-32.ico">
+                        <span>Cart<span id="cart-items-count"></span> </span>
+                    </a>
+                    <ul id="cart-menu-subsection" class="menu-subsection"></ul>
                 </li>
-            </ul>
-        </li>
 
-        <li>
-            <a href="/cart">
-                 <img id="cart-button" src="/public/pictures/cart-73-32.ico">
-                 <span>Cart<span id="cart-items-count"></span> </span>
-            </a>
-            <ul id="cart-menu-subsection" class="menu-subsection"></ul>
-        </li>
+                <% if(locals.user) { %>
+                    <li>
+                        <a>
+                            <img id="profile-picture" src="<%= locals.user.profilePicture %>" alt="User Image">
+                            <%= locals.user.username %>
+                        </a>
+                        <ul class="menu-subsection">
+                            <li>
+                                <div></div><a href="/logout">Logout</a>
+                                <div></div>
+                            </li>
 
-        <li>
-            <a> 
-                 <img id="theme-switch" src="/public/pictures/sun.png">
-            </a>
-        </li>
+                        </ul>
+                    </li>
+                    <% } %>
+
+                        <li>
+                            <a>
+                                <img id="theme-switch" src="/public/pictures/sun.png">
+                            </a>
+                        </li>
 
     </ul>
 </nav>
 
-<script>
-    let selectedTheme = localStorage.getItem('theme');
-    applyTheme(selectedTheme ? parseInt(selectedTheme) : 0);
-</script>
+<% if(!locals.user) { %>
+    <section id="login-section">
+
+        <form action="/login" method="POST" id="login-section">
+            <label>Username:
+                <input type="text" class="basic-text-input" name="username" required>
+            </label>
+
+            <label>Password:
+                <input type="Password" class="basic-text-input" name="password" required>
+            </label>
+
+            <input type="submit" value="Login" class="basic-button">
+        </form>
+
+    </section>
+    <% } %>
+
+        <script>
+            let selectedTheme = localStorage.getItem('theme');
+            applyTheme(selectedTheme ? parseInt(selectedTheme) : 0);
+        </script>

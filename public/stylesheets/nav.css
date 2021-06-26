@@ -17,9 +17,12 @@ nav #theme-switch {
   max-width: calc(var(--menu-height) * 8 / 10);
   max-height: auto;
 }
-nav #cart-button {
+nav #cart-button, nav #profile-picture {
   max-width: calc(var(--menu-height) * 8 / 10);
   max-height: auto;
+}
+nav #profile-picture {
+  border-radius: 1rem;
 }
 nav #cart-items-count {
   font-weight: bold;

@@ -1,12 +1,16 @@
 DROP TABLE IF EXISTS product;
+DROP TABLE IF EXISTS users;
 
 DROP TYPE IF EXISTS product_category;
 DROP TYPE IF EXISTS product_color;
 DROP TYPE IF EXISTS product_brand;
+DROP TYPE IF EXISTS roles;
 
 CREATE TYPE product_category as ENUM ('laptop', 'smartphone', 'pc');
 CREATE TYPE product_color as ENUM('white', 'black', 'grey');
 CREATE TYPE product_brand as ENUM('apple', 'samsung', 'huawei');
+
+CREATE TYPE roles AS ENUM('admin', 'common');
 
 CREATE TABLE IF NOT EXISTS product 
 (
@@ -35,3 +39,29 @@ product_weight, color, release_date, brand, chipset, returnable) VALUES
 ('Apple Workstation', 'Get your job done with this powerful workstation.', 'apple-606761_640.jpg', 9500, 'pc', 15.250, 'white', '2018-05-29', 'apple', 'Intel i7 Octa-Core 3.7GHz, 2048GB, 32GB RAM', FALSE),
 ('Notebook Samsung Ideapad 320', 'You should have this laptop', 'instagram-1519537_640.jpg', 5500, 'laptop', 3.525, 'white', '2021-02-20', 'samsung', 'Intel i5 Quad-Core 2.8GHz, 512GB, 8GB RAM', TRUE),
 ('Iphone 6S', 'You can have one too!', 'iphone-410324_640.jpg', 4000, 'smartphone', 3.1, 'white', '2017-01-15', 'apple', 'A20 Quad-Core 2.9GHz, 128GB, 6GB RAM', TRUE);
+
+CREATE TABLE IF NOT EXISTS users (
+   id serial PRIMARY KEY,
+   username VARCHAR(50) UNIQUE NOT NULL,
+   first_name VARCHAR(100) NOT NULL,
+   last_name VARCHAR(100) NOT NULL,
+   passwd NCHAR(128) NOT NULL,
+   email VARCHAR(100) NOT NULL,
+   user_role roles DEFAULT 'common',
+   register_date TIMESTAMP DEFAULT current_timestamp,
+   profile_picture VARCHAR(256) DEFAULT '/public/profiles/pictures/default.png'
+);
+
+-- GRANT USAGE, SELECT ON SEQUENCE product_id_seq to techaltar;
+GRANT USAGE, SELECT ON SEQUENCE users_id_seq TO techaltar;
+
+GRANT ALL PRIVILEGES ON TABLE product to techaltar;
+GRANT ALL PRIVILEGES ON TABLE users to techaltar;
+
+-- CREATE TABLE IF NOT EXISTS accesari (
+--    id serial PRIMARY KEY,
+--    ip VARCHAR(100) NOT NULL,
+--    user_id INT NULL REFERENCES utilizatori(id),
+--    pagina VARCHAR(100) NOT NULL,
+--    data_accesare TIMESTAMP DEFAULT current_timestamp
+-- );

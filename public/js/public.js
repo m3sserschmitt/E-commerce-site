@@ -16,7 +16,7 @@ function compileAnimatedGallery(req, res, next) {
       return res.status(500).end();
     }
 
-    res.setHeader('Content-Type','text/css');
+    res.setHeader('Content-Type', 'text/css');
 
     return res.sendFile(path.join(__dirname, '../../temp/animated-gallery.css'));
   }

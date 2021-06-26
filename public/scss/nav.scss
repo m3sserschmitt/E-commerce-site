@@ -13,9 +13,13 @@ nav {
         max-height: auto;
     }
 
-    #cart-button {
+    #cart-button, #profile-picture {
         max-width: calc(var(--menu-height) * 8 / 10);
         max-height: auto;
+    }
+
+    #profile-picture {
+        border-radius: 1rem;
     }
 
     #cart-items-count {

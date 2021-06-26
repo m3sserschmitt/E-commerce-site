@@ -18,8 +18,12 @@
   "license": "ISC",
   "dependencies": {
     "child_process": "^1.0.2",
+    "connect-flash": "^0.1.1",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
+    "express-flash-messages": "^0.1.1",
+    "express-session": "^1.17.2",
+    "formidable": "^1.2.2",
     "jpg": "^0.0.1",
     "pg": "^8.6.0",
     "request-ip": "^2.1.3",

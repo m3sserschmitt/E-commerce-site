@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head') %>
+        <link rel="stylesheet" href="/public/stylesheets/register.css" type="text/css">
+
+        <title>Register on TechAltar</title>
+</head>
+
+<body>
+    <header>
+        
+        <%- include ('../partials/nav') %>
+        <h1>Register on TechAltar</h1>
+    </header>
+
+    <main>
+        <section id="register-section">
+
+            <form action="/register" method="POST" id="register-form" name="register" class="basic-form">
+                <div class="form-entry">
+                    <label for="first-name-input">
+                        First Name:
+                    </label>
+                    <input id="first-name-input" class="basic-text-input" name="firstName" type="text" required>
+                </div>
+
+                <div class="form-entry">
+                    <label for="last-name-input">
+                        Last Name:
+                    </label>
+                    <input id="last-name-input" class="basic-text-input" name="lastName" type="text" required>
+                </div>
+
+                <div class="form-entry">
+                    <label for="username-input">
+                        Username:
+                    </label>
+                    <input id="username-input" class="basic-text-input" name="username" type="text" required>
+                </div>
+
+                <div class="form-entry">
+                    <label for="email-input">
+                        Email:
+                    </label>
+                    <input id="email-input" class="basic-text-input" name="email" type="text" required>
+                </div>
+
+                <div class="form-entry">
+                    <label for="password-input">
+                        Password:
+                    </label>
+                    <input id="password-input" class="basic-text-input" name="password" type="password" required>
+                </div>
+
+                <div class="form-entry">
+                    <label for="retype-password-input">
+                        Retype Password:
+                    </label>
+                    <input id="retyped-password-input" class="basic-text-input" type="password"
+                        required>
+                </div>
+
+                <div class="form-entry">
+                    <label for="picture-input">
+                        Profile Picture:
+                    </label>
+                    <input id="picture-input" name="profilePicture" type="file">
+                </div>
+
+                <input type="submit" value="register" id="submit-form-button" class="basic-button">
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <%- include ('../partials/footer') %>
+    </footer>
+
+    <script src="/public/js/register.js"></script>
+
+</body>
+
+</html>
