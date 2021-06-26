@@ -1,5 +1,6 @@
 const express = require('express'),
-  { Client } = require('pg'),
+  { Client, Pool } = require('pg'),
+  // { Pool } = require('pg'),
   { getGallery } = require('./public/js/gallery'),
   { page403, compileAnimatedGallery } = require('./public/js/public'),
   formidable = require('formidable'),
@@ -9,14 +10,23 @@ const express = require('express'),
 
 const SESSION_PASSPHRASE = 'dkjasghfiujcxkahfuvhjfvsd';
 
-const client = new Client({
-  host: 'localhost',
-  port: 5432,
-  user: 'techaltar',
-  password: 'techaltar',
-  database: 'techaltar'
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
-client.connect();
+
+// const client = new Client({
+//   host: 'localhost',
+//   port: 5432,
+//   user: 'techaltar',
+//   password: 'techaltar',
+//   database: 'techaltar'
+// });
+// client.connect();
+
+const client = await pool.connect();
 
 const app = express();
 app.use(expressSession({
@@ -67,8 +77,8 @@ app.get(['/static_gallery', '/animated_gallery'], (req, res) => {
       {
         small: 500,
         medium: 550
-      }), 
-      user: req.session.user
+      }),
+    user: req.session.user
   });
 });
 
@@ -160,16 +170,16 @@ app.post('/login', (req, res) => {
   let form = formidable.IncomingForm();
 
   form.parse(req, (parseError, textFields) => {
-    
+
     let hashedPassword = crypto.createHash('sha512').update(textFields.password).digest('hex');
     let dbQuery = `select id, username, first_name, last_name, profile_picture
     from users 
     where username='${textFields.username}' and passwd='${hashedPassword}'`;
-    
+
     client.query(dbQuery, (queryError, queryResult) => {
       if (queryError || queryResult.rows.length != 1) {
         // error
-      } 
+      }
       else {
         let userData = queryResult.rows[0];
 
@@ -197,7 +207,7 @@ app.get('/logout', (req, res) => {
 app.get('/*', (req, res) => {
   const requestedPage = 'pages' + req.url;
 
-  res.render(requestedPage, {user: req.session.user}, (err, html) => {
+  res.render(requestedPage, { user: req.session.user }, (err, html) => {
     if (err) {
       res.status(404).render('pages/404', { user: req.session.user });
     } else {
