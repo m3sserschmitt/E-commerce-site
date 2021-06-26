@@ -206,5 +206,12 @@ app.get('/*', (req, res) => {
   });
 });
 
-app.listen(8080);
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 8000;
+}
+app.listen(port);
+
+
+// app.listen(8080);
 console.log('[+] App started successfully.');
