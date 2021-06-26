@@ -10,23 +10,31 @@ const express = require('express'),
 
 const SESSION_PASSPHRASE = 'dkjasghfiujcxkahfuvhjfvsd';
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+// const pool = new Pool({
+//   connectionString: 'postgres://ormxjcykqfajkl:d575a71903d85f8476b040cb8bffa68b3b097d3b045d2c109df9d269fd960929@ec2-3-226-134-153.compute-1.amazonaws.com:5432/d94e6g1ms83mvt',
+//   ssl: {
+//     rejectUnauthorized: false
+//   }
+// });
+
+const client = new Client({
+  host: 'ec2-3-226-134-153.compute-1.amazonaws.com',
+  port: 5432,
+  user: 'ormxjcykqfajkl',
+  password: 'd575a71903d85f8476b040cb8bffa68b3b097d3b045d2c109df9d269fd960929',
+  database: 'd94e6g1ms83mvt',
   ssl: {
     rejectUnauthorized: false
   }
 });
 
 // const client = new Client({
-//   host: 'localhost',
-//   port: 5432,
-//   user: 'techaltar',
-//   password: 'techaltar',
-//   database: 'techaltar'
+//  host: 'postgres://ormxjcykqfajkl:d575a71903d85f8476b040cb8bffa68b3b097d3b045d2c109df9d269fd960929@ec2-3-226-134-153.compute-1.amazonaws.com:5432/d94e6g1ms83mvt'
 // });
-// client.connect();
 
-const client = pool.connect();
+client.connect();
+
+// const client = pool.connect();
 
 const app = express();
 app.use(expressSession({
