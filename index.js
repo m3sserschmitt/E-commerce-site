@@ -17,10 +17,10 @@ const SESSION_PASSPHRASE = crypto.randomBytes(32).toString();
 
 // listen port;
 let LISTEN_PORT = process.env.PORT ? process.env.PORT : 8000;
-console.log(LISTEN_PORT);
+
 // database URI;
-let DATABASE_URI = process.env.DATABASE_URI ?
-  process.env.DATABASE_URI : 'postgres://techaltar:techaltar@localhost:5432/techaltar';
+let DATABASE_URL = process.env.DATABASE_URL ?
+  process.env.DATABASE_URL : 'postgres://techaltar:techaltar@localhost:5432/techaltar';
 
 const app = express();
 
@@ -48,9 +48,9 @@ app.use('/public/stylesheets', compileAnimatedGallery);
 app.use('/public', express.static(__dirname + '/public'));
 
 // create database client;
-console.log(DATABASE_URI);
+console.log(DATABASE_URL);
 const client = new Client({
-  connectionString: DATABASE_URI,
+  connectionString: DATABASE_URL,
   ssl: {
     rejectUnauthorized: false
   }
@@ -258,8 +258,9 @@ app.get('/*', (req, res) => {
   });
 });
 
-app.listen(LISTEN_PORT);
+
 console.log(`[+] App started on port ${LISTEN_PORT}.`);
+console.log(`[+] Database URL: ${DATABASE_URL}`);
 
 // heroku ps:scale web=1 -> turn on
 // heroku ps:scale web=0 -> turn off
