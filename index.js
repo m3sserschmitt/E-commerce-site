@@ -9,7 +9,7 @@ const
   formidable = require('formidable'),
   crypto = require('crypto'),
   flash = require('connect-flash'),
-  expressSession = require('express-session');
+  expressSession = require('cookie-session');
 
 
 // generate random bytes for session key;
@@ -17,7 +17,7 @@ const SESSION_PASSPHRASE = crypto.randomBytes(32).toString();
 
 // listen port;
 let LISTEN_PORT = process.env.PORT ? process.env.PORT : 8000;
-
+console.log(LISTEN_PORT);
 // database URI;
 let DATABASE_URI = process.env.DATABASE_URI ?
   process.env.DATABASE_URI : 'postgres://techaltar:techaltar@localhost:5432/techaltar';
@@ -48,6 +48,7 @@ app.use('/public/stylesheets', compileAnimatedGallery);
 app.use('/public', express.static(__dirname + '/public'));
 
 // create database client;
+console.log(DATABASE_URI);
 const client = new Client({
   connectionString: DATABASE_URI,
   ssl: {
