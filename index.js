@@ -48,7 +48,6 @@ app.use('/public/stylesheets', compileAnimatedGallery);
 app.use('/public', express.static(__dirname + '/public'));
 
 // create database client;
-console.log(DATABASE_URL);
 const client = new Client({
   connectionString: DATABASE_URL,
   ssl: {
@@ -258,9 +257,12 @@ app.get('/*', (req, res) => {
   });
 });
 
+app.listen(LISTEN_PORT, () => {
+  console.log(`[+] App started on port ${LISTEN_PORT}.`);
+  console.log(`[+] Database URL: ${DATABASE_URL}`);
+});
 
-console.log(`[+] App started on port ${LISTEN_PORT}.`);
-console.log(`[+] Database URL: ${DATABASE_URL}`);
+
 
 // heroku ps:scale web=1 -> turn on
 // heroku ps:scale web=0 -> turn off
