@@ -90,25 +90,38 @@
     </ul>
 </nav>
 
-<% if(!locals.user) { %>
-    <section id="login-section">
-
-        <form action="/login" method="POST" id="login-section">
-            <label>Username:
-                <input type="text" class="basic-text-input" name="username" required>
-            </label>
-
-            <label>Password:
-                <input type="Password" class="basic-text-input" name="password" required>
-            </label>
-
-            <input type="submit" value="Login" class="basic-button">
-        </form>
-
+<% if(locals.success && locals.success.length) {%>
+    <section class="notification success-notification">
+        <%= locals.success %>
     </section>
     <% } %>
 
-        <script>
-            let selectedTheme = localStorage.getItem('theme');
-            applyTheme(selectedTheme ? parseInt(selectedTheme) : 0);
-        </script>
+        <% if(locals.error && locals.error.length) {%>
+            <section class="notification error-notification">
+                <%= locals.error %>
+            </section>
+            <% } %>
+
+                <% if(!locals.user) { %>
+                    <section id="login-section">
+
+                        <form action="/login" method="POST" id="login-section">
+                            <label>Username:
+                                <input type="text" class="basic-text-input" name="username" required>
+                            </label>
+
+                            <label>Password:
+                                <input type="Password" class="basic-text-input" name="password" required>
+                            </label>
+
+                            <input type="submit" value="Login" class="basic-button">
+                        </form>
+
+                    </section>
+
+                    <% } %>
+
+                        <script>
+                            let selectedTheme = localStorage.getItem('theme');
+                            applyTheme(selectedTheme ? parseInt(selectedTheme) : 0);
+                        </script>

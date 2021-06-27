@@ -1,0 +1,16 @@
+.notification {
+    text-align: center;
+    font-weight: 800;
+    font-size: x-large;
+    min-width: 100%;
+}
+
+.success-notification {
+    background-color: var(--secondary-color);
+    color: var(--light-grey);
+}
+
+.error-notification {
+    background-color: rgb(148, 79, 79);
+    color: rgb(230, 211, 211);
+}

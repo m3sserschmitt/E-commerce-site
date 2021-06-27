@@ -20,6 +20,13 @@
     font-size: large;
 }
 
+@media screen and (max-width: 1000px) {
+    .basic-text-input {
+        font-weight: normal;
+        font-size: inherit;
+    }
+}
+
 .basic-text-input:focus {
     outline-width: 0;
 }

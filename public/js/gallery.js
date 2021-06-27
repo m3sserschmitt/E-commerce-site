@@ -7,7 +7,7 @@ const fs = require('fs'),
 function checkGalleryPictures(jsonPath, dimensions) {
   // get config file;
   var galleryConf = fs.readFileSync(jsonPath);
-
+  
   // parse JSON text into JSON Object;
   var JSONGallery = JSON.parse(galleryConf);
 

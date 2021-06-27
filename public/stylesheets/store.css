@@ -69,6 +69,8 @@ main {
     background-color: white;
     max-width: 32px;
     max-height: 32px;
+    width: 5vw;
+    height: auto;
     transition: 0.3s;
 }
 

@@ -5,4 +5,11 @@
 
 #login-section label {
     color: var(--light-grey);
+    display: block;
+}
+
+@media screen and (min-width: 1000px) {
+    #login-section label {
+        display: inline;
+    }
 }

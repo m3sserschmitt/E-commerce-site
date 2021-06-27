@@ -6,5 +6,7 @@ document.getElementById('register-form').onsubmit = () => {
     return false;
   }
 
+  
+
   return true;
 };

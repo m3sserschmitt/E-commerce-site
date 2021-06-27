@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS users (
    first_name VARCHAR(100) NOT NULL,
    last_name VARCHAR(100) NOT NULL,
    passwd NCHAR(128) NOT NULL,
-   email VARCHAR(100) NOT NULL,
+   email VARCHAR(100) UNIQUE NOT NULL,
    user_role roles DEFAULT 'common',
    register_date TIMESTAMP DEFAULT current_timestamp,
    profile_picture VARCHAR(256) DEFAULT '/public/profiles/pictures/default.png'

@@ -1,66 +1,75 @@
-const express = require('express'),
-  { Client, Pool } = require('pg'),
-  // { Pool } = require('pg'),
+const cookieParser = require('cookie-parser');
+const
+  { Client } = require('pg'),
   { getGallery } = require('./public/js/gallery'),
   { page403, compileAnimatedGallery } = require('./public/js/public'),
+
+  express = require('express'),
+  // bodyParser = require('body-parser'),
   formidable = require('formidable'),
   crypto = require('crypto'),
   flash = require('connect-flash'),
   expressSession = require('express-session');
 
-const SESSION_PASSPHRASE = 'dkjasghfiujcxkahfuvhjfvsd';
 
-// const pool = new Pool({
-//   connectionString: 'postgres://ormxjcykqfajkl:d575a71903d85f8476b040cb8bffa68b3b097d3b045d2c109df9d269fd960929@ec2-3-226-134-153.compute-1.amazonaws.com:5432/d94e6g1ms83mvt',
-//   ssl: {
-//     rejectUnauthorized: false
-//   }
-// });
+// generate random bytes for session key;
+const SESSION_PASSPHRASE = crypto.randomBytes(32).toString();
 
-const client = new Client({
-  host: 'ec2-3-226-134-153.compute-1.amazonaws.com',
-  port: 5432,
-  user: 'ormxjcykqfajkl',
-  password: 'd575a71903d85f8476b040cb8bffa68b3b097d3b045d2c109df9d269fd960929',
-  database: 'd94e6g1ms83mvt',
-  ssl: {
-    rejectUnauthorized: false
-  }
-});
+// listen port;
+let LISTEN_PORT = process.env.PORT ? process.env.PORT : 8000;
 
-// const client = new Client({
-//  host: 'postgres://ormxjcykqfajkl:d575a71903d85f8476b040cb8bffa68b3b097d3b045d2c109df9d269fd960929@ec2-3-226-134-153.compute-1.amazonaws.com:5432/d94e6g1ms83mvt'
-// });
-
-client.connect();
-
-// const client = pool.connect();
+// database URI;
+let DATABASE_URI = process.env.DATABASE_URI ?
+  process.env.DATABASE_URI : 'postgres://techaltar:techaltar@localhost:5432/techaltar';
 
 const app = express();
+
+// app setup;
+// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser('secret'));
 app.use(expressSession({
   secret: SESSION_PASSPHRASE,
   resave: true,
   saveUninitialized: false
 }));
+app.use(flash());
+app.use((req, res, next) => {
 
-// app.use(flash());
+  res.locals.user = req.session.user;
+  res.locals.error = req.flash('error');
+  res.locals.success = req.flash('success');
 
-client.query('SELECT unnest(enum_range(NULL::product_category));', (err, categories) => {
-  if (!err) {
-    app.locals.productCategories = categories.rows.map(category => category.unnest);
-  } else {
-    console.log('[-] Warning: Cannot fetch categories from database.');
-    console.log(err);
-  }
+  next()
 });
-
 app.set('view engine', 'ejs');
 
 app.use('/public/json', page403);
 app.use('/public/stylesheets', compileAnimatedGallery);
 app.use('/public', express.static(__dirname + '/public'));
 
+// create database client;
+const client = new Client({
+  connectionString: DATABASE_URI,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
+
+// connect to database, then get product categories;
+client.connect().then(() => {
+  client.query('SELECT unnest(enum_range(NULL::product_category));', (err, categories) => {
+    if (!err) {
+      app.locals.productCategories = categories.rows.map(category => category.unnest);
+    } else {
+      console.log('[-] Warning: Cannot fetch categories from database.');
+      console.log(err);
+    }
+  });
+});
+
+
 app.get(['/', '/index'], (req, res) => {
+
   res.render('pages/index', {
     clientIp: req.ip,
     galleryPictures: getGallery(
@@ -137,6 +146,7 @@ app.post('/register', (req, res) => {
 
   // parse incoming form;
   form.parse(req, (parseError, textFields, files) => {
+
     // check data;
     for (let field of ['firstName', 'lastName', 'username', 'password']) {
       if (textFields[field] === "" || !textFields[field].length) {
@@ -145,8 +155,6 @@ app.post('/register', (req, res) => {
     }
 
     if (!error) {
-      // let encryptedPassword = crypto.scryptSync(textFields.password, SERVER_PASSWORD, 32).toString('ascii');
-
       // calculate hash for user password;
       let hashedPassword = crypto.createHash('sha512').update(textFields.password).digest('hex');
 
@@ -158,18 +166,36 @@ app.post('/register', (req, res) => {
         '${textFields.lastName}', 
         '${textFields.email}',
         '${hashedPassword}'
-      );`;
+      ) returning id, profile_picture;`; // also return client id;
 
+      // try to insert data into database
       client.query(dbInsertCommand, (queryError, queryResult) => {
-        if (queryError) {
+        if (queryError) { // inform user in case of errors;
           error += queryError.detail;
 
-          // req.flash('notify', 'This is a test notification.');
-          res.render('pages/register');
+          req.flash('error', `Some errors occurred during registration process: ${error}.`)
+          res.redirect('/register');
+
         } else {
+          // setup user session;
+          req.session.user = {
+            id: queryResult.rows[0].id,
+            username: textFields.username,
+            firstName: textFields.firstName,
+            lastName: textFields.lastName,
+            profilePicture: queryResult.rows[0].profile_picture
+          };
+
+          // inform user of successful registration;
+          req.flash('success', `Welcome ${textFields.username}! You have been successfully registered on TechAltar!`);
+
+          //redirect;
           res.redirect('/index');
         }
       });
+    } else {
+      req.flash('error', `Some errors occurred during registration process: ${error}.`)
+      res.redirect('/register');
     }
   });
 });
@@ -179,16 +205,21 @@ app.post('/login', (req, res) => {
 
   form.parse(req, (parseError, textFields) => {
 
+    //compute hash for user password;
     let hashedPassword = crypto.createHash('sha512').update(textFields.password).digest('hex');
     let dbQuery = `select id, username, first_name, last_name, profile_picture
     from users 
     where username='${textFields.username}' and passwd='${hashedPassword}'`;
 
+    // try to find user into database;
     client.query(dbQuery, (queryError, queryResult) => {
       if (queryError || queryResult.rows.length != 1) {
-        // error
+        // if user not found or database error, show error message;
+        req.flash('error', 'Login failed. Checkout your credentials and try again.');
+        res.redirect('/index');
       }
       else {
+        // if user found, setup session;
         let userData = queryResult.rows[0];
 
         req.session.user = {
@@ -199,8 +230,8 @@ app.post('/login', (req, res) => {
           profilePicture: userData.profile_picture
         };
 
-        console.log(userData.profilePicture);
-
+        // show success message and redirect;
+        req.flash('success', `Welcome back, ${textFields.username}!`);
         res.redirect('/index');
       }
     });
@@ -208,7 +239,9 @@ app.post('/login', (req, res) => {
 });
 
 app.get('/logout', (req, res) => {
+  // destroy user session;
   req.session.destroy();
+
   res.redirect('/index');
 });
 
@@ -224,12 +257,9 @@ app.get('/*', (req, res) => {
   });
 });
 
-let port = process.env.PORT;
-if (port == null || port == "") {
-  port = 8000;
-}
-app.listen(port);
+app.listen(LISTEN_PORT);
+console.log(`[+] App started on port ${LISTEN_PORT}.`);
 
-
-// app.listen(8080);
-console.log('[+] App started successfully.');
+// heroku ps:scale web=1 -> turn on
+// heroku ps:scale web=0 -> turn off
+// https://boiling-headland-87620.herokuapp.com
