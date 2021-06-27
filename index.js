@@ -240,8 +240,11 @@ app.post('/login', (req, res) => {
 
 app.get('/logout', (req, res) => {
   // destroy user session;
-  req.session.destroy();
+  req.session = null;
 
+  // req.session.destroy not defined with cookie-session. 
+  // It works with express-session module
+  
   res.redirect('/index');
 });
 
